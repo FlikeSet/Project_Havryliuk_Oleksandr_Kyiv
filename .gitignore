@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/packages
+/Project_Havryliuk_Oleksandr_Kyiv/bin/Debug
+/Project_Havryliuk_Oleksandr_Kyiv/obj/Debug

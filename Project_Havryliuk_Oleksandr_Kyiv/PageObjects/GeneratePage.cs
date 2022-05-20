@@ -24,11 +24,12 @@ namespace Project_Havryliuk_Oleksandr_Kyiv.PageObjects
             PageFactory.InitElements(driver, this);
         }
 
-        internal void CheckFirstParagraphStart()
+        internal bool CheckFirstParagraphCorrectStart()
         {
             string firstParagraphText = AllParagraphs[0].Text;
-            string testSentense = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
-            Assert.IsTrue(firstParagraphText.Substring(0, 25) != testSentense.Substring(0, 25));
+            string testSentense = "Lorem ipsum dolor sit amet";
+            string a = firstParagraphText.Substring(0, 26);
+            return firstParagraphText.Substring(0, 26) == testSentense;
         }
 
         internal void CheckCorrectlyAmount(string item)
@@ -91,7 +92,7 @@ namespace Project_Havryliuk_Oleksandr_Kyiv.PageObjects
             Assert.IsTrue(2 < avarageCountParagraps && avarageCountParagraps < 3);
         }
 
-        internal void CheckAmountParagraphsContainWord(string word)
+        internal void CheckAmountParagraphsContainsWord(string word)
         {
             for (int i = 0; i < AllParagraphs.Count; i++)
             {

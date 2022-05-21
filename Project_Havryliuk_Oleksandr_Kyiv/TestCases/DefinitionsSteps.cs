@@ -18,8 +18,8 @@ namespace Project_Havryliuk_Oleksandr_Kyiv.TestCases
             try
             {
                 var homePage = new HomePage(driver);
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
-                homePage.ClickAgreeCookies();
+                //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+                //homePage.ClickAgreeCookies();
             }
             catch (NoSuchElementException) { }
 

@@ -10,8 +10,8 @@ namespace Project_Havryliuk_Oleksandr_Kyiv
 
     public class HomePage : BasePage
     {
-        [FindsBy(How = How.XPath, Using = "//button[@mode='primary']")]
-        private IWebElement AgreeButton { get; set; }
+        //[FindsBy(How = How.XPath, Using = "//button[@mode='primary']")]
+        //private IWebElement AgreeButton { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//*[contains(@href,'.lipsum.')]")]
         private IList<IWebElement> ListLanguageButtons { get; set; }
@@ -30,12 +30,12 @@ namespace Project_Havryliuk_Oleksandr_Kyiv
 
         [FindsBy(How = How.XPath, Using = "//label[@for ='start']")]
         private IWebElement Checkbox { get; set; }
-
+        /*
         internal void ClickAgreeCookies() 
         {
             AgreeButton.Click(); 
         }
-        
+        */
         public HomePage(IWebDriver driver): base(driver)
         {
             PageFactory.InitElements(driver, this);

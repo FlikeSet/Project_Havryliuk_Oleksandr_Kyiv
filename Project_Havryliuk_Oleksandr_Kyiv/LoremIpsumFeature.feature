@@ -56,4 +56,4 @@ Scenario Outline: Check correct avarage of paragraphs, what include certain word
 	Then User checks correct avarage of paragraps with <numberOfGenerations> generations
 	Examples: 
 	| numberOfGenerations | word  |
-	| 10		      | lorem |
+	| 10				  | lorem |

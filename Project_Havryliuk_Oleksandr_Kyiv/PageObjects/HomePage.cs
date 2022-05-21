@@ -10,75 +10,71 @@ namespace Project_Havryliuk_Oleksandr_Kyiv
 
     public class HomePage : BasePage
     {
-        //[FindsBy(How = How.XPath, Using = "//button[@mode='primary']")]
-        //public IWebElement AgreeButton;
+        [FindsBy(How = How.XPath, Using = "//button[@mode='primary']")]
+        private IWebElement AgreeButton { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//*[contains(@href,'.lipsum.')]")]
-        public IList<IWebElement> ListLanguageButtons;
+        private IList<IWebElement> ListLanguageButtons { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//*[@id='Panes']/div[1]/p")]
-        public IWebElement FirstParagraph;
+        private IWebElement FirstParagraph { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//*[@id='generate']")]
-        public IWebElement GenerateButton;
+        private IWebElement GenerateButton { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//label[@for !='start']")]
-        public IList<IWebElement> ListRadioButtons;
+        private IList<IWebElement> ListRadioButtons { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//input[@name='amount']")]
-        public IWebElement InputField;
+        private IWebElement InputField { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//label[@for ='start']")]
-        public IWebElement Checkbox;
+        private IWebElement Checkbox { get; set; }
 
-
-        //internal void ClickAgreeCookies() { AgreeButton.Click(); }
-
-        public HomePage(IWebDriver driver) : base(driver)
+        internal void ClickAgreeCookies() 
+        {
+            AgreeButton.Click(); 
+        }
+        
+        public HomePage(IWebDriver driver): base(driver)
         {
             PageFactory.InitElements(driver, this);
         }
 
-        internal void ClickLanguageButton(string language)
+        internal IList<IWebElement> GetListLanguageButtons()
         {
-            for(int i = 0; i < ListLanguageButtons.Count; i++)
-            {
-                if (ListLanguageButtons[i].GetAttribute("href").Contains(language)){ ListLanguageButtons[i].Click(); }
-            }  
+            return ListLanguageButtons;
         }
 
-        internal void CheckFirstParagraph(string word)
+        internal IList<IWebElement> GetListRadioButtons()
         {
-            FirstParagraph.Text.Contains(word);
+            return ListRadioButtons;
         }
+
+        internal IWebElement GetGenerateButton()
+        {
+            return GenerateButton;
+        }
+
+        internal IWebElement GetFirstParagraph()
+        {
+            return FirstParagraph;
+        }
+
+        public IWebElement GetInputField()
+        {
+            return InputField;
+        }
+
+        internal IWebElement GetCheckbox()
+        {
+            return Checkbox;
+        }
+
 
         internal void ClickGenerateButton()
         {
             GenerateButton.Click();
-        }
-
-        internal void ClickItemsButton(string item)
-        {
-            for (int i = 0; i < ListRadioButtons.Count; i++)
-            {
-                if (ListRadioButtons[i].Text == item)
-                {
-                    ListRadioButtons[i].Click();
-                }
-            }
-        }
-
-        internal void MakeInput(int input)
-        {
-            int defaultAmount = 5;
-            InputField.Clear();
-
-            if (input <= 0)
-            {
-                input = defaultAmount;
-            }
-
-            InputField.SendKeys(input.ToString());
         }
 
         internal void ClickCheckBox()

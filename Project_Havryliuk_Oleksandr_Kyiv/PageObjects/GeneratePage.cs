@@ -10,95 +10,37 @@ namespace Project_Havryliuk_Oleksandr_Kyiv.PageObjects
     public class GeneratePage : BasePage
     {
         [FindsBy(How = How.XPath, Using = "//div[@id='generated']")]
-        public IWebElement GeneratedInfo;
+        private IWebElement GeneratedInfo { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//a[@title='Lorem Ipsum']")]
-        public IWebElement HomePageButton;
+        private IWebElement HomePageButton { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//div[@id='lipsum']//p")]
-        public IList<IWebElement> AllParagraphs;
-        
-        public static double counter = 0;
-        public GeneratePage(IWebDriver driver) : base(driver)
+        private IList<IWebElement> AllParagraphs { get; set; }
+
+        internal GeneratePage(IWebDriver driver) : base(driver)
         {
             PageFactory.InitElements(driver, this);
         }
 
-        internal bool CheckFirstParagraphCorrectStart()
+        internal IList<IWebElement> GetAllParagraphs()
         {
-            string firstParagraphText = AllParagraphs[0].Text;
-            string testSentense = "Lorem ipsum dolor sit amet";
-            string a = firstParagraphText.Substring(0, 26);
-            return firstParagraphText.Substring(0, 26) == testSentense;
+            return AllParagraphs;
         }
 
-        internal void CheckCorrectlyAmount(string item)
+        internal IWebElement GetGeneratedInfo()
         {
-            int counter = 0, index = 0;
-            switch (item)
-            {
+            return GeneratedInfo;
+        }
 
-                case "words":
-                    
-                    string firstParagraphText = AllParagraphs[0].Text;
-
-                    while (index < firstParagraphText.Length && char.IsWhiteSpace(firstParagraphText[index]))
-                        index++;
-
-                    while (index < firstParagraphText.Length)
-                    {
-                        while (index < firstParagraphText.Length && !char.IsWhiteSpace(firstParagraphText[index]))
-                            index++;
-
-                        counter++;
-
-                        while (index < firstParagraphText.Length && char.IsWhiteSpace(firstParagraphText[index]))
-                            index++;
-                    }
-
-                    Assert.IsTrue(GeneratedInfo.Text.Contains(counter.ToString()));
-                    break;
-                case "bytes":
-                    for (int i = 0; i < AllParagraphs[0].Text.Length; i++)
-                    {
-
-                        counter++;
-
-                    }
-
-                    Assert.IsTrue(GeneratedInfo.Text.Contains(counter.ToString()));
-                    break;
-                case "paragraphs":
-                    counter = AllParagraphs.Count;
-                    Assert.IsTrue(GeneratedInfo.Text.Contains(counter.ToString()));
-                    break;
-                case "lists":
-                    counter = AllParagraphs.Count / 2;
-                    Assert.IsTrue(GeneratedInfo.Text.Contains(" " + counter.ToString() + " "));
-                    break;
-            }
-            
+        internal IWebElement GetHomePageButton()
+        {
+            return HomePageButton;
         }
 
         internal void ClickHomePageButton()
         {
             HomePageButton.Click();
-        }
-
-
-        internal void CheckCorrectlyAvarage(int numberOfGenerations)
-        {
-            double avarageCountParagraps = counter / numberOfGenerations;
-            Assert.IsTrue(2 < avarageCountParagraps && avarageCountParagraps < 3);
-        }
-
-        internal void CheckAmountParagraphsContainsWord(string word)
-        {
-            for (int i = 0; i < AllParagraphs.Count; i++)
-            {
-                string paragraphText = AllParagraphs[i].Text;
-                if (Regex.IsMatch(paragraphText, Regex.Escape(word), RegexOptions.IgnoreCase)) { counter++; }
-            }
-        }
+        }  
     }
 }
